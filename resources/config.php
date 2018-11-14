@@ -7,12 +7,6 @@
                 "password" => "pw",
                 "host" => "localhost"
             ),
-            "db2" => array(
-                "dbname" => "database2",
-                "username" => "dbUser",
-                "password" => "pa$$",
-                "host" => "localhost"
-            )
         ),
         "urls" => array(
             "baseUrl" => "http://www.disMal.net"
