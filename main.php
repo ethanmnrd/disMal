@@ -4,16 +4,19 @@
     if ($conn->connect_error) die(mysql_fatal_error("OOPS"));
 
     echo <<<_END
-<header><B>disMal Malware Check</B></header>
-<form margin: 0 auto; action="main.php" method="post" enctype='multipart/form-data'>
-<pre center>
-Select file:
+<html>
+    <head>
+        <title>disMal Malicious File Check</title>
+    </head>
+    <body>
+        <h1>disMal Malware Check</h1>
 
-    <input type='file' name='filename' size='10'>
-
-    <input type="submit" value="Upload">
-</pre>
-</form>
+        <form margin: 0 auto; action="main.php" method="post" enctype='multipart/form-data'>
+            Select File: <input type='file' name='filename' size='10'>
+                         <input type='submit' value='Upload'>
+        </form>
+    </body>
+</html>
 _END;
 
     $conn->close();
