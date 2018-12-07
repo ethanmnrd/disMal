@@ -6,24 +6,7 @@
     echo <<<_END
 <html>
     <head>
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                width: 100%;
-            }
-
-            body {
-                display: table;
-            }
-
-            .center {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-        </style>
+        <link rel="stylesheet" href="styles.css">
         <title>disMal Malicious File Check</title>
     </head>
     <body>
@@ -48,17 +31,22 @@ _END;
         $password = $_SESSION['password'];
 
         echo <<< _END
-            <h4><a href="sig.php">Signature Upload</a></h4>
-            <h4><a href="dismal.php" onclick="destroy_session_and_data();">Logout</a></h4>
+            <form action="sig.php" method="post" enctype='multipart/form-data'>
+                <button type="submit">Signature Upload</button>
+            </form>
+            <form action="dismal.php" method="post" enctype='multipart/form-data'>
+                <input type="hidden" name='logout' value='yes'>
+                <button type="submit">Logout</button>
+            </form>
         </div>
     </body>
-</html>
+</html> 
 _END;
     } else {
         echo <<< _END
-            <h4><div style=padding:25;">
-                    <a href="auth.php">Staff Login</a>
-            </div></h4>
+            <form action="auth.php" method="post" enctype='multipart/form-data'>
+                <button type="submit">Staff Login</button>
+            </form>
         </div>
     </body>
 </html>

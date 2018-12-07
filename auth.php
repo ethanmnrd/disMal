@@ -3,6 +3,16 @@
     $connection = new mysqli($hn, $un, $pw, $db);
     if ($connection->connect_error) die($connection->connect_error);
     
+    echo <<< _END
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>disMal Login</title>
+    </head>
+    <body>
+    <div class="center">
+_END;
+
     if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
     {
         $un_temp = mysql_entities_fix_string($connection, $_SERVER['PHP_AUTH_USER']);
@@ -24,8 +34,18 @@
                 session_start();
                 $_SESSION['username'] = $un_temp;
                 $_SESSION['password'] = $pw_temp;
-                echo "You are now logged in as '$row[1]'";
-                die ("<p><a href=dismal.php>Click here to continue</a></p>");
+                
+                if(isset($_POST['siglogin']))
+                {
+                    echo "<form action='sig.php' method='post'>";
+                }
+                else
+                {
+                    echo "<form action='dismal.php' method='post'>";
+                }
+                echo "You are now logged in as '$row[1]'<br><br>
+                        <button type='submit'>Click here to continue</button> 
+                    </form>";
             }
             else die("Invalid username/password combination");
         }
@@ -39,6 +59,8 @@
     }
     $connection->close();
     
+    echo "</div></body></html>";
+
     function mysql_entities_fix_string($connection, $string)
     {
         return htmlentities(mysql_fix_string($connection, $string));
