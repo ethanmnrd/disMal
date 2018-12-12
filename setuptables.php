@@ -1,7 +1,7 @@
 <?php // setupusers.php
     require_once 'login.php';
-    $connection = new mysqli($hn, $un, $pw, $db);
-    if ($connection->connect_error) die($connection->connect_error);
+    $conn = new mysqli($hn, $un, $pw, $db);
+    if ($conn->connect_error) die($conn->connect_error);
 
     $query = "CREATE TABLE IF NOT EXISTS users (
         uid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -10,8 +10,8 @@
         PRIMARY KEY(uid)
         ) ENGINE MyISAM";
 
-    $result = $connection->query($query);
-    if (!$result) die($connection->error);
+    $result = $conn->query($query);
+    if (!$result) die($conn->error);
 
     $salt1 = "qm&h*"; $salt2 = "pg!@";
 
@@ -19,20 +19,20 @@
     $password = 'malWare1sbad';
     $token = hash('ripemd128', "$salt1$password$salt2");
 
-    add_user($connection, $username, $token);
+    add_user($conn, $username, $token);
 
     $query = "CREATE TABLE IF NOT EXISTS mal (
             name VARCHAR(25) NOT NULL,
             sig VARCHAR(20) NOT NULL,
             PRIMARY KEY(sig)) ENGINE MyISAM";
 
-    $result = $connection->query($query);
-    if (!$result) die ($connection->error);
+    $result = $conn->query($query);
+    if (!$result) die ($conn->error);
 
-    function add_user($connection, $usn, $paw)
+    function add_user($conn, $usn, $paw)
     {
         $query = "INSERT INTO users (username, password) VALUES('$usn', '$paw')";
-        $result = $connection->query($query);
-        if (!$result) die($connection->error);
+        $result = $conn->query($query);
+        if (!$result) die($conn->error);
     }
 ?>
